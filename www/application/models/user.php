@@ -1,0 +1,83 @@
+<?php
+
+class User extends Eloquent {
+
+  public static $username   = 'email';
+  public static $password   = 'password';
+  public static $table      = 'users';
+  public static $timestamps = true;
+
+
+    /*
+   *  Find a user using the user id.
+   *
+   *  @param id:integer
+   *    The id of the user we want to find.
+   *
+   *  @return
+   *    User  - User that was sucessfully found.
+   *    False - Failed to find user with the given id.
+   */
+  public static function find_by_id ($id) {
+    $result = self::find ($id);
+    if ($result == NULL) {
+      return false;
+    } else {
+      return $result->first ();
+    }
+  }
+
+  /*
+   *  Find a user using the user email address.
+   *
+   *  @param email:string
+   *    The email address of the user we want to find.
+   *
+   *  @return
+   *    User  - User that was sucessfully found.
+   *    False - Failed to find user with the given email address.
+   */
+  public static function find_by_email ($email) {
+    $result = DB::table (self::$table)
+    ->where('email', '=', strtolower ($email));
+    if ($result == NULL) {
+      return false;
+    } else {
+      return $result->first ();
+    }
+  }
+
+  /*
+   *  Create a new user.
+   *
+   *  @param email:string
+   *    The email address of the new user.
+   *
+   *  @param password:string
+   *    The password (non hashed) of the new user.
+   *
+   *  @param first_name:string
+   *    The first name of the new user.
+   *
+   *  @param last_name:string
+   *    The last name of the new user.
+   *
+   *  @return
+   *    User  - User was sucessfully created.
+   *    False - Failed to create new user
+   */
+  public static function create_new ($email, $password, $first_name, $last_name) {
+    if (self::find_by_email ($email)) {
+      return false;
+    }
+
+    $user = new self ();
+    $user->email = $email;
+    $user->password = Hash::make ($password);
+    $user->first_name = $first_name;
+    $user->last_name = $last_name;
+    $user->save ();
+
+    return $user;
+  }
+}

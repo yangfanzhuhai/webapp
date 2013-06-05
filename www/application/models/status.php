@@ -1,0 +1,57 @@
+<?php
+
+class Status extends Eloquent {
+
+  const AUTH_LOGIN_SUCCESS  = 100;
+  const AUTH_LOGIN_FAILURE  = 101;
+  const AUTH_LOGIN_REQUIRED = 102;
+
+  const AUTH_LOGOUT_SUCCESS = 110;
+
+  const AUTH_SIGNUP_SUCCESS = 120;
+  const AUTH_SIGNUP_FAILURE = 121;
+
+  public static function auth_login_success () {
+    return array (
+      'status'         => self::AUTH_LOGIN_SUCCESS,
+      'status_message' => "You have successfully logged in.",
+    );
+  }
+
+  public static function auth_login_failure () {
+    return array (
+      'status'         => self::AUTH_LOGIN_FAILURE,
+      'status_message' => "Your login credentials are incorrect.",
+    );
+  }
+
+  public static function auth_login_required () {
+    return array (
+      'status'         => self::AUTH_LOGIN_REQUIRED,
+      'status_message' => "You must login before you can access this content.",
+    );
+  }
+
+  public static function auth_logout_success () {
+    return array (
+      'status'         => self::AUTH_LOGOUT_SUCCESS,
+      'status_message' => "You have successfully logged out.",
+    );
+  }
+
+  public static function auth_signup_success () {
+    return array (
+      'status'         => self::AUTH_SIGNUP_SUCCESS,
+      'status_message' => "Signup successful.",
+    );
+  }
+
+  public static function auth_signup_failure () {
+    return array (
+      'status'         => self::AUTH_SIGNUP_FAILURE,
+      'status_message' => "Signup request was rejected.",
+    );
+  }
+
+
+}

@@ -1,0 +1,28 @@
+<?php
+
+class Destroyer_Json_Controller extends Base_Controller {
+
+  function __construct() {
+    parent::__construct();
+  }
+
+
+  public function action_auth_login () {
+    $userdata = array (
+      'username' => Input::get ('username'),
+      'password' => Input::get ('password'),
+    );
+
+    if (Auth::attempt ($userdata)) {
+      return json_encode (Status::auth_login_success ());
+    } else {
+      return json_encode (Status::auth_login_failure ());
+    }
+  }
+
+  public function action_auth_logout () {
+    Auth::logout ();
+    return json_encode (Status::auth_logout_success ());
+  }
+
+}

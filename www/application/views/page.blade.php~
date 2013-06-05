@@ -1,0 +1,5 @@
+@layout ('template')
+
+@section ('site_title')
+Blast City
+@end_section

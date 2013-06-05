@@ -1,0 +1,45 @@
+@layout ('content.auth.page')
+
+@section ('content')
+{{ Form::open ('/json/auth/signup') }}
+  <div data-role="fieldcontain" align="center" style="width: 30%; text-align: center">
+    {{ Form::label ('email', 'E-Mail Address') }}
+    {{ Form::text ('email') }}
+  </div>
+  <div data-role="fieldcontain" align="center" style="width: 30%; text-align: center">
+    {{ Form::label ('password', 'Password') }}
+    {{ Form::password ('password') }}
+  </div>
+  <div data-role="fieldcontain" align="center" style="width: 30%; text-align: center">
+    {{ Form::label ('password_repeat', 'Password repeat') }}
+    {{ Form::password ('password_repeat') }}
+  </div>
+
+  <hr>
+
+  <div data-role="fieldcontain" align="center" style="width: 30%; text-align: center">
+    {{ Form::label ('first_name', 'First Name') }}
+    {{ Form::text ('first_name') }}
+  </div>
+  <div data-role="fieldcontain" align="center" style="width: 30%; text-align: center">
+    {{ Form::label ('last_name', 'Last Name') }}
+    {{ Form::text ('last_name') }}
+  </div>
+  
+  <span></span>
+  
+  <div data-role="fieldcontain" style="width: 30%" align="right">
+    <input id="login" name="" value="Register" type="submit" align="right">
+  </div>
+{{ Form::close () }}
+
+<script>
+  $(document).ready(function() { 
+    $('form').ajaxForm({
+      complete: function (xhr) {
+        alert (xhr.responseText);
+      }
+    });
+  });
+</script>
+@endsection

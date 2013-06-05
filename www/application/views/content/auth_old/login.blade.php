@@ -1,0 +1,44 @@
+@layout('destroyer::content.auth.page')
+
+@section('content')
+<h1>Secure Login</h1>
+
+<center>
+  <section class="block">
+    <h2>New user?</h2>
+    <p>New users are required to register to create and manage a self catering website.</p>
+    <p>To register for free, click Sign up.</p>
+    <center>
+      <div class="button_wrapper">
+        {{ HTML::link ('signup', "Sign up", array("class" => "button")) }}
+      </div>
+    </center>
+  </section>
+  <section class="block">
+    <h2>Existing user?</h2>
+    <p>Existing users can access their account by signing in.</p>
+    <p>Enter your username and password, then click Login.</p>
+    @if (Session::has('login_errors'))
+      <div class="error">
+        Incorrect username or password. Please try again.
+      </div>
+    @endif
+    <div class="paddingTop">
+      {{ Form::open() }}
+        <div class="row">
+          {{ Form::label('username', 'Email :') }}
+          {{ Form::text('username', '') }}
+        </div>
+        <div class="row">
+        {{ Form::label('password', 'Password :') }}
+        {{ Form::password('password') }}
+        </div>
+        <div class="button_wrapper">
+          {{ Form::submit('Login', array ('class' => 'button')) }}
+        </div>
+      {{ Form::close() }}
+    </div>
+  </section>
+</center>
+
+@endsection

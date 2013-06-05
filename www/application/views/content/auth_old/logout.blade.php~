@@ -1,0 +1,16 @@
+@layout('self_catering::content.auth.page')
+
+@section('content')
+<h1>Log out</h1>
+
+<center>
+  <section class="block">
+    <h2>You have been logged out</h2>
+    <p>You have successfully logged out of your account.</p>
+    <div class="button_wrapper">
+      {{ HTML::link ('/', "Continue", array("class" => "button")) }}
+    </div>
+  </section>
+</center>
+
+@endsection
